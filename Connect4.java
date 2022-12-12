@@ -15,7 +15,20 @@ public class Connect4{
 
 
 	public void playGame(){
+		// As long as the user has not won the game, the loop will continue
 		Scanner in = new Scanner(System.in);
+		while(true){
+			System.out.println("Please enter a row and column that you wish to place your peice in.");
+			System.out.println("Row:");
+			int row = in.nextInt();
+			System.out.println("Column:");
+			int col = in.nextInt();
+			if(placeAvaliable(row, col)){
+				// Add code Here
+			}
+			
+		}
+		
 		createBoard();
 		displayBoard();
 		
@@ -34,8 +47,28 @@ public class Connect4{
 		};
 		}
 
+	private boolean placeAvaliable(int row, int col){
+		boolean avaliable = true;
+		if(board[row][col] != ' '){
+			avaliable = false;
+		}
+		if(avaliable = true){
+			if(turn == 0){
+				board[row][col] = '1';
+				turn = -1;
+			}
+		}
+		else{
+			board[row][col] = '0';
+			turn = 0;
+		}
+		return avaliable;
+		
+	}
+
 	private void displayBoard(){
 		// Displays the ASCII art for the board and displays the charachters at that specific section of the board.
+		// Board is 6*7
 		// Use two spaces for the board println before the "|"
 		System.out.println("    |    |    |    |    |    |    |");
 		System.out.println(" "+ board[0][0]+ "  | "+ board[0][1]+ "  | "+ board[0][2]+ "  | "+ board[0][3]+ "  | "+ board[0][4]+ "  | " + board[0][5] + "  | "+ board[0][6] + "  | ");
