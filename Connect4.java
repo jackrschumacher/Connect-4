@@ -16,6 +16,8 @@ public class Connect4{
 
 	public void playGame(){
 		// As long as the user has not won the game, the loop will continue
+		createBoard();
+		displayBoard();
 		Scanner in = new Scanner(System.in);
 		while(true){
 			System.out.println("Please enter a row and column that you wish to place your peice in.");
@@ -23,16 +25,14 @@ public class Connect4{
 			int row = in.nextInt();
 			System.out.println("Column:");
 			int col = in.nextInt();
-			if(placeAvaliable(row, col)){
-				// Add code Here
-			}
+			
 			
 		}
 		
-		createBoard();
-		displayBoard();
 		
-		return;
+		
+		
+		
 		
 	}
 
@@ -45,7 +45,7 @@ public class Connect4{
 			{' ', ' ', ' ', ' ', ' ', ' ', ' '},
 			{' ', ' ', ' ', ' ', ' ', ' ', ' '},
 		};
-		}
+}
 
 	private boolean placeAvaliable(int row, int col){
 		boolean avaliable = true;
