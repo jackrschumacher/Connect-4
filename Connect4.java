@@ -18,13 +18,12 @@ public class Connect4 {
 		displayBoard();
 		Scanner in = new Scanner(System.in);
 		while(true){
-			System.out.println("Please enter a row and column that you wish to place your peice in.");
-			System.out.println("Row:");
-			int row = in.nextInt();
+			System.out.println("Please enter a column that you wish to place your piece in.");
+			
 			System.out.println("Column:");
 			int col = in.nextInt();
 			
-			if(placeAvaliable(row, col)){
+			if(dropPiece(col)){
 				displayBoard();
 				if(checkForWinner(row, col) != ' '){
 					System.out.println("Check for winner:" + checkForWinner(row, col));
@@ -49,7 +48,7 @@ public class Connect4 {
 			
 	}
 		
-		
+	
 		
 
 
@@ -64,8 +63,18 @@ public class Connect4 {
 		};
 	}
 
-	private boolean placeAvaliable(int row, int col) {
+	private boolean dropPiece(int col) {
 		boolean avaliable = true;
+		int row = 0;
+
+		while(board[row][col] != ' ' && row < 6){
+			row++;
+		}
+
+
+		
+
+		
 		System.out.println(board[row][col]);
 		if (board[row][col] != ' ') {
 			avaliable = false;
@@ -169,28 +178,28 @@ public class Connect4 {
 		// Board is 6*7
 		// Use two spaces for the board println before the "|"
 		System.out.println("|    |    |    |    |    |    |    |");
-		System.out.println("| " + board[0][0] + "  | " + board[0][1] + "  | " + board[0][2] + "  | " + board[0][3] + "  | "
-				+ board[0][4] + "  | " + board[0][5] + "  | " + board[0][6] + "  | ");
-		System.out.println("|____|____|____|____|____|____|____|");
-		System.out.println("|    |    |    |    |    |    |    |");
-		System.out.println("| " + board[1][0] + "  | " + board[1][1] + "  | " + board[1][2] + "  | " + board[1][3] + "  | "
-				+ board[1][4] + "  | " + board[1][5] + "  | " + board[1][6] + "  | ");
-		System.out.println("|____|____|____|____|____|____|____|");
-		System.out.println("|    |    |    |    |    |    |    |");
-		System.out.println("| " + board[2][0] + "  | " + board[2][1] + "  | " + board[2][2] + "  | " + board[2][3] + "  | "
-				+ board[2][4] + "  | " + board[2][5] + "  | " + board[2][6] + "  | ");
-		System.out.println("|____|____|____|____|____|____|____|");
-		System.out.println("|    |    |    |    |    |    |    |");
-		System.out.println("| " + board[3][0] + "  | " + board[3][1] + "  | " + board[3][2] + "  | " + board[3][3] + "  | "
-				+ board[3][4] + "  | " + board[3][5] + "  | " + board[3][6] + "  | ");
+		System.out.println("| " + board[5][0] + "  | " + board[5][1] + "  | " + board[5][2] + "  | " + board[5][3] + "  | "
+				+ board[5][4] + "  | " + board[5][5] + "  | " + board[5][6] + "  | ");
 		System.out.println("|____|____|____|____|____|____|____|");
 		System.out.println("|    |    |    |    |    |    |    |");
 		System.out.println("| " + board[4][0] + "  | " + board[4][1] + "  | " + board[4][2] + "  | " + board[4][3] + "  | "
 				+ board[4][4] + "  | " + board[4][5] + "  | " + board[4][6] + "  | ");
 		System.out.println("|____|____|____|____|____|____|____|");
 		System.out.println("|    |    |    |    |    |    |    |");
-		System.out.println("| " + board[5][0] + "  | " + board[5][1] + "  | " + board[5][2] + "  | " + board[5][3] + "  | "
-				+ board[5][4] + "  | " + board[5][5] + "  | " + board[5][6] + "  | ");
+		System.out.println("| " + board[3][0] + "  | " + board[3][1] + "  | " + board[3][2] + "  | " + board[3][3] + "  | "
+				+ board[3][4] + "  | " + board[3][5] + "  | " + board[3][6] + "  | ");
+		System.out.println("|____|____|____|____|____|____|____|");
+		System.out.println("|    |    |    |    |    |    |    |");
+		System.out.println("| " + board[2][0] + "  | " + board[2][1] + "  | " + board[2][2] + "  | " + board[2][3] + "  | "
+				+ board[2][4] + "  | " + board[2][5] + "  | " + board[2][6] + "  | ");
+		System.out.println("|____|____|____|____|____|____|____|");
+		System.out.println("|    |    |    |    |    |    |    |");
+		System.out.println("| " + board[1][0] + "  | " + board[1][1] + "  | " + board[1][2] + "  | " + board[1][3] + "  | "
+				+ board[1][4] + "  | " + board[1][5] + "  | " + board[1][6] + "  | ");
+		System.out.println("|____|____|____|____|____|____|____|");
+		System.out.println("|    |    |    |    |    |    |    |");
+		System.out.println("| " + board[0][0] + "  | " + board[0][1] + "  | " + board[0][2] + "  | " + board[0][3] + "  | "
+				+ board[0][4] + "  | " + board[0][5] + "  | " + board[0][6] + "  | ");
 		System.out.println("|____|____|____|____|____|____|____|");
 	}
 }
