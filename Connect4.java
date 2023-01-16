@@ -9,7 +9,7 @@ public class Connect4 {
 	private int turn;
 
 	public Connect4() {
-		turn = 0;
+		turn = 1;
 	}
 
 	public void playGame(){
@@ -22,8 +22,8 @@ public class Connect4 {
 			
 			System.out.println("Column:");
 			int col = in.nextInt();
-			
-			if(dropPiece(col)){
+			int row = dropPiece(col);
+			if(row != -1){
 				displayBoard();
 				if(checkForWinner(row, col) != ' '){
 					System.out.println("Check for winner:" + checkForWinner(row, col));
@@ -41,7 +41,7 @@ public class Connect4 {
 				}
 			}
 			else{
-				System.out.println("The place is not available. Select another location.");
+				System.out.println("This column is full. Select another column.");
 			}
 			
 		}	
@@ -63,33 +63,27 @@ public class Connect4 {
 		};
 	}
 
-	private boolean dropPiece(int col) {
-		boolean avaliable = true;
+	private int dropPiece(int col) {
 		int row = 0;
 
-		while(board[row][col] != ' ' && row < 6){
+		while(row < 6 && board[row][col] != ' ' ){
 			row++;
 		}
-
-
-		
-
-		
-		System.out.println(board[row][col]);
-		if (board[row][col] != ' ') {
-			avaliable = false;
+		if(row == 6){
+			return -1;
 		}
 		else{
-			if (turn == 0){
+			if (turn == 1){
 				board[row][col] = '1';
-				turn = -1;
+				turn = 2;
 			}
 			else {
 				board[row][col] = '2';
-				turn = 0;
+				turn = 1;
 			}
+      return row;
 		}
-		return avaliable;
+		
 
 	}
 
