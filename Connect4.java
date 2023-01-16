@@ -13,12 +13,13 @@ public class Connect4 {
 
 	public void playGame(){
 		// As long as the user has not won the game, the loop will continue
-		
+		// Set up variables and call create and display board functions
 		int col = 0;
 		createBoard();
 		displayBoard();
 		Scanner in = new Scanner(System.in);
 		while(true){
+			// Create a boolean variable ensuring that the user inputs a valid column number (1-7)
 			boolean haveValidCol = false;
 			while(!haveValidCol){
 				System.out.println("Please enter a column that you wish to place your piece in.");
@@ -33,6 +34,7 @@ public class Connect4 {
 			}
 			// Subtract col so player does not have to enter 0 col
 			col = col - 1;
+			// Call the drop peice command, which determines into which row the peice will fall into, also check the winner based on returned values
 			int row = dropPiece(col);
 			if(row != -1){
 				displayBoard();
@@ -61,7 +63,7 @@ public class Connect4 {
 	}			
 	
 	
-
+// Create the board array
 	private void createBoard() {
 		this.board = new char[][] {
 				{ ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
@@ -82,14 +84,17 @@ public class Connect4 {
 		if(row == 6){
 			return -1;
 		}
+		// Determine the turn of the player and place the peice in the correct column
 		else{
 			if (turn == 1){
 				board[row][col] = '1';
 				turn = 2;
+				System.out.println("It is Player 2's turn");
 			}
 			else {
 				board[row][col] = '2';
 				turn = 1;
+				System.out.println("It is Player 1's turn");
 			}
       return row;
 		}
@@ -146,6 +151,8 @@ public class Connect4 {
 		// Current row/col is a match
 		int count = 1;
 		int currentCol = col - 1;
+		// Go down the current row checking for a match of 4 peices.
+		// Ensure that current Column is not less than one
 		while(currentCol >= 0 && board[row][currentCol] == charMatch){
 			currentCol--;
 			count++;
@@ -155,6 +162,7 @@ public class Connect4 {
 			currentCol++;
 			count++;
 		}
+		// If greater than or equal to 4, then the user has a match
 		if(count >= 4){
 			return charMatch; 
 		}
@@ -168,6 +176,8 @@ public class Connect4 {
 		// Current row/col is a match
 		int count = 1;
 		int currentRow = row - 1;
+		// Go down the current column checking for a match of 4 peices.
+		// Ensure that current Column is not less than one
 		while(currentRow >= 0 && board[currentRow][col] == charMatch){
 			currentRow--;
 			count++;
@@ -191,6 +201,7 @@ public class Connect4 {
 		int count = 1;
 		int currentRow = row - 1;
 		int currentCol = col - 1;
+		// Increment up and to the right checking that not going over board length
 		while(currentRow >= 0 && currentCol >= 0 && board[currentRow][currentCol] == charMatch){
 			currentRow--;
 			currentCol--;
@@ -198,11 +209,13 @@ public class Connect4 {
 		}
 		currentRow = row + 1;
 		currentCol = col + 1;
+		// Increment down and to the right checking that not going over board length
 		while(currentRow < board.length && currentCol < board[0].length && board[currentRow][currentCol] == charMatch){
 			currentRow++;
 			currentCol++;
 			count++;
 		}
+		// If greater than or equal to 4, then the user has a match
 		if(count >= 4){
 			return charMatch; 
 		}
@@ -212,21 +225,19 @@ public class Connect4 {
 	}
 	private char checkDiagonalUpLeft(int row, int col){
 		char charMatch = board[row][col];
-		System.out.println(board.length);
-		System.out.println(board[0].length);
 		// Current row/col is a match
 		int count = 1;
 		int currentRow = row - 1;
 		int currentCol = col + 1;
+		// Increment up and to the Left, checking that not going over board length
 		while(currentRow >= 0 && currentCol < board[0].length && board[currentRow][currentCol] == charMatch){
-			System.out.print(row);
-			System.out.println(col);
 			currentRow--;
 			currentCol++;
 			count++;
 		}
 		currentRow = row + 1;
 		currentCol = col - 1;
+		// Increment down and to the left, checking that not going over board length
 		while(currentRow < board.length && currentCol >= 0 && board[currentRow][currentCol] == charMatch){
 			System.out.print(row);
 			System.out.println(col);
@@ -234,6 +245,7 @@ public class Connect4 {
 			currentCol--;
 			count++;
 		}
+		// If 4 in a row, the user has a match
 		if(count >= 4){
 			return charMatch; 
 		}
