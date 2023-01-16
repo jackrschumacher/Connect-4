@@ -95,11 +95,7 @@ public class Connect4 {
 		// Calls the different check functions -> Columns, rows, Diagonal to the right,
 		// diagonal to the left
 
-		char checkWinner = checkRowLeft(row,col);
-		if (checkWinner != ' ') {
-			return checkWinner;
-		}
-		checkWinner = checkRowRight(row,col);
+		char checkWinner = checkRow(row,col);
 		if (checkWinner != ' ') {
 			return checkWinner;
 		}
@@ -139,36 +135,20 @@ public class Connect4 {
 	}
 
 
-
-
-	private char checkRowLeft(int row, int col) {
-		char charMatch = board[row][col];
-		
-		int i = col;
-		int count = 0;
-		while(i > 0 && board[row][i] != charMatch){
-			System.out.println(i);
-			System.out.println(board[row][i]);
-			i--;
-			count++;
-		}
-		if(count >= 4){
-			return charMatch; 
-		}
-		else{
-			return ' ';
-		}
-	}
 	
-	private char checkRowRight(int row, int col) {
+	private char checkRow(int row, int col) {
 		char charMatch = board[row][col];
 		
-		int i = col;
-		int count = 0;
-		while(i < board.length && board[row][i] != charMatch){
-			System.out.println(i);
-			System.out.println(board[row][i]);
-			i++;
+		// Current row/col is a match
+		int count = 1;
+		int currentCol = col - 1;
+		while(currentCol >= 0 && board[row][currentCol] == charMatch){
+			currentCol--;
+			count++;
+		}
+		currentCol = col + 1;
+		while(currentCol < board.length && board[row][currentCol] == charMatch){
+			currentCol++;
 			count++;
 		}
 		if(count >= 4){
@@ -178,6 +158,9 @@ public class Connect4 {
 			return ' ';
 		}
 	}
+
+
+	
 	
 	private char checkDiagonalUpRight(int row, int col){
 
