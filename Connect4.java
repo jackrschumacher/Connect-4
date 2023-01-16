@@ -13,15 +13,26 @@ public class Connect4 {
 
 	public void playGame(){
 		// As long as the user has not won the game, the loop will continue
-		int colLength = 
+		
+		int col = 0;
 		createBoard();
 		displayBoard();
 		Scanner in = new Scanner(System.in);
 		while(true){
-			
-			System.out.println("Please enter a column that you wish to place your piece in.");
-			System.out.println("Column:");
-			int col = in.nextInt();
+			boolean haveValidCol = false;
+			while(!haveValidCol){
+				System.out.println("Please enter a column that you wish to place your piece in.");
+				System.out.println("Column:");
+				col = in.nextInt();
+				if(col >= 1 && col <=7){
+					haveValidCol = true;
+				}
+				else{
+					System.out.println("Column must be between 1 and 7");
+				}
+			}
+			// Subtract col so player does not have to enter 0 col
+			col = col - 1;
 			int row = dropPiece(col);
 			if(row != -1){
 				displayBoard();
@@ -47,12 +58,9 @@ public class Connect4 {
 			}
 			
 		}	
-			
-	}
-		
+	}			
 	
-		
-
+	
 
 	private void createBoard() {
 		this.board = new char[][] {
@@ -67,7 +75,7 @@ public class Connect4 {
 
 	private int dropPiece(int col) {
 		int row = 0;
-
+		// Loop through rows to see where last one that is blank is
 		while(row < 6 && board[row][col] != ' ' ){
 			row++;
 		}
