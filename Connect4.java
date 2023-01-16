@@ -25,16 +25,18 @@ public class Connect4 {
 			int row = dropPiece(col);
 			if(row != -1){
 				displayBoard();
-				if(checkForWinner(row, col) != ' '){
-					System.out.println("Check for winner:" + checkForWinner(row, col));
+				System.out.println("Check for winner:" + checkForWinner(row, col));
+				char winner = checkForWinner(row,col);
+				if(winner != ' '){
 					
-					if(checkForWinner(row, col) == 't'){
+					
+					if(winner == 't'){
 						System.out.println("You tied!");
 					}
-					else if(checkForWinner(row, col) == '1'){
+					else if(winner == '1'){
 						System.out.println("1 Won!");
 					}
-					else if(checkForWinner(row, col) == '2'){
+					else if(winner == '2'){
 						System.out.println("2 Won!");
 					}
 					return;
@@ -92,22 +94,32 @@ public class Connect4 {
 		// order to end the game
 		// Calls the different check functions -> Columns, rows, Diagonal to the right,
 		// diagonal to the left
-    char checkWinnerCol = checkCol(row,col);
-		if (checkWinnerCol != ' ') {
-			return checkWinnerCol;
+
+		char checkWinner = checkRowLeft(row,col);
+		if (checkWinner != ' ') {
+			return checkWinner;
 		}
-		char checkWinnerRow = checkRow(row,col);
-		if (checkWinnerRow != ' ') {
-			return checkWinnerRow;
+		checkWinner = checkRowRight(row,col);
+		if (checkWinner != ' ') {
+			return checkWinner;
 		}
-		char checkWinnerDiagonalRight = checkDiagonalRight(row,col);
-		if (checkWinnerDiagonalRight != ' ') {
-			return checkWinnerDiagonalRight;
+		checkWinner = checkDiagonalUpRight(row,col);
+		if (checkWinner != ' ') {
+			return checkWinner;
 		}
-		char checkWinnerDiagonalLeft = checkDiagonalLeft(row,col);
-		if (checkWinnerDiagonalLeft != ' ') {
-			return checkWinnerDiagonalLeft;
+		checkWinner = checkDiagonalUpLeft(row,col);
+		if (checkWinner != ' ') {
+			return checkWinner;
 		}
+		checkWinner = checkDiagonalDownRight(row,col);
+		if (checkWinner != ' ') {
+			return checkWinner;
+		}
+		checkWinner = checkDiagonalDownLeft(row,col);
+		if (checkWinner != ' ') {
+			return checkWinner;
+		}
+		
 		// Check to see if spaces on the board are filled
 		// If all the spaces are filled and the user has not won the game, they players have tied. 
 		// If not, the game continues until someone wins
@@ -126,36 +138,63 @@ public class Connect4 {
 
 	}
 
-	private char checkCol(int row, int col) {
-		char charMatch = board[row][col];
 
-		for (int i = 0; i < board.length; i++) {
-			if (board[i][col] != charMatch) {
-				return ' ';
-			}
+
+
+	private char checkRowLeft(int row, int col) {
+		char charMatch = board[row][col];
+		
+		int i = col;
+		int count = 0;
+		while(i > 0 && board[row][i] != charMatch){
+			System.out.println(i);
+			System.out.println(board[row][i]);
+			i--;
+			count++;
 		}
-		return charMatch;
+		if(count >= 4){
+			return charMatch; 
+		}
+		else{
+			return ' ';
+		}
+	}
+	
+	private char checkRowRight(int row, int col) {
+		char charMatch = board[row][col];
+		
+		int i = col;
+		int count = 0;
+		while(i < board.length && board[row][i] != charMatch){
+			System.out.println(i);
+			System.out.println(board[row][i]);
+			i++;
+			count++;
+		}
+		if(count >= 4){
+			return charMatch; 
+		}
+		else{
+			return ' ';
+		}
+	}
+	
+	private char checkDiagonalUpRight(int row, int col){
+
+		return ' ';
+	}
+	private char checkDiagonalUpLeft(int row, int col){
+
+		return ' ';
 	}
 
-
-
-	private char checkRow(int row, int col) {
-		char charMatch = board[row][col];
-		for (int i = 0; i < board.length; i++) {
-			if (board[i][row] != charMatch) {
-				return ' ';
-			}
-		}
-		return charMatch;
-	}
-
-	private char checkDiagonalRight(int row, int col){
+	private char checkDiagonalDownRight(int row, int col){
 		// Initialize count variable in order to setup while loop
 
 		return ' ';
   }	
 
-	private char checkDiagonalLeft(int row, int col){
+	private char checkDiagonalDownLeft(int row, int col){
 		char charMatch = board[row][col];
 		int count = 1;
 
