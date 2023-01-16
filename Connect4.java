@@ -1,4 +1,3 @@
-
 // Import everything in java.util
 import java.util.*;
 
@@ -14,12 +13,13 @@ public class Connect4 {
 
 	public void playGame(){
 		// As long as the user has not won the game, the loop will continue
+		int colLength = 
 		createBoard();
 		displayBoard();
 		Scanner in = new Scanner(System.in);
 		while(true){
-			System.out.println("Please enter a column that you wish to place your piece in.");
 			
+			System.out.println("Please enter a column that you wish to place your piece in.");
 			System.out.println("Column:");
 			int col = in.nextInt();
 			int row = dropPiece(col);
@@ -99,6 +99,10 @@ public class Connect4 {
 		if (checkWinner != ' ') {
 			return checkWinner;
 		}
+		checkWinner = checkCol(row,col);
+		if (checkWinner != ' ') {
+			return checkWinner;
+		}
 		checkWinner = checkDiagonalUpRight(row,col);
 		if (checkWinner != ' ') {
 			return checkWinner;
@@ -107,14 +111,7 @@ public class Connect4 {
 		if (checkWinner != ' ') {
 			return checkWinner;
 		}
-		checkWinner = checkDiagonalDownRight(row,col);
-		if (checkWinner != ' ') {
-			return checkWinner;
-		}
-		checkWinner = checkDiagonalDownLeft(row,col);
-		if (checkWinner != ' ') {
-			return checkWinner;
-		}
+
 		
 		// Check to see if spaces on the board are filled
 		// If all the spaces are filled and the user has not won the game, they players have tied. 
@@ -138,7 +135,6 @@ public class Connect4 {
 	
 	private char checkRow(int row, int col) {
 		char charMatch = board[row][col];
-		
 		// Current row/col is a match
 		int count = 1;
 		int currentCol = col - 1;
@@ -147,7 +143,7 @@ public class Connect4 {
 			count++;
 		}
 		currentCol = col + 1;
-		while(currentCol < board.length && board[row][currentCol] == charMatch){
+		while(currentCol < board[0].length && board[row][currentCol] == charMatch){
 			currentCol++;
 			count++;
 		}
@@ -159,33 +155,86 @@ public class Connect4 {
 		}
 	}
 
-
-	
+	private char checkCol(int row, int col) {
+		char charMatch = board[row][col];
+		// Current row/col is a match
+		int count = 1;
+		int currentRow = row - 1;
+		while(currentRow >= 0 && board[currentRow][col] == charMatch){
+			currentRow--;
+			count++;
+		}
+		currentRow = row + 1;
+		while(currentRow < board.length && board[currentRow][col] == charMatch){
+			currentRow++;
+			count++;
+		}
+		if(count >= 4){
+			return charMatch; 
+		}
+		else{
+			return ' ';
+		}
+	}
 	
 	private char checkDiagonalUpRight(int row, int col){
-
-		return ' ';
+		char charMatch = board[row][col];
+		// Current row/col is a match
+		int count = 1;
+		int currentRow = row - 1;
+		int currentCol = col - 1;
+		while(currentRow >= 0 && currentCol >= 0 && board[currentRow][currentCol] == charMatch){
+			currentRow--;
+			currentCol--;
+			count++;
+		}
+		currentRow = row + 1;
+		currentCol = col + 1;
+		while(currentRow < board.length && currentCol < board[0].length && board[currentRow][currentCol] == charMatch){
+			currentRow++;
+			currentCol++;
+			count++;
+		}
+		if(count >= 4){
+			return charMatch; 
+		}
+		else{
+			return ' ';
+		}
 	}
 	private char checkDiagonalUpLeft(int row, int col){
-
-		return ' ';
+		char charMatch = board[row][col];
+		System.out.println(board.length);
+		System.out.println(board[0].length);
+		// Current row/col is a match
+		int count = 1;
+		int currentRow = row - 1;
+		int currentCol = col + 1;
+		while(currentRow >= 0 && currentCol < board[0].length && board[currentRow][currentCol] == charMatch){
+			System.out.print(row);
+			System.out.println(col);
+			currentRow--;
+			currentCol++;
+			count++;
+		}
+		currentRow = row + 1;
+		currentCol = col - 1;
+		while(currentRow < board.length && currentCol >= 0 && board[currentRow][currentCol] == charMatch){
+			System.out.print(row);
+			System.out.println(col);
+			currentRow++;
+			currentCol--;
+			count++;
+		}
+		if(count >= 4){
+			return charMatch; 
+		}
+		else{
+			return ' ';
+		}
 	}
 
-	private char checkDiagonalDownRight(int row, int col){
-		// Initialize count variable in order to setup while loop
 
-		return ' ';
-  }	
-
-	private char checkDiagonalDownLeft(int row, int col){
-		char charMatch = board[row][col];
-		int count = 1;
-
-		int currentCol = col;
-		int currentRow = row;
-
-		return ' ';
-  }
 
 
 	private void displayBoard() {
