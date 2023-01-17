@@ -38,7 +38,6 @@ public class Connect4 {
 			int row = dropPiece(col);
 			if(row != -1){
 				displayBoard();
-				System.out.println("Check for winner:" + checkForWinner(row, col));
 				char winner = checkForWinner(row,col);
 				if(winner != ' '){
 					
@@ -47,10 +46,10 @@ public class Connect4 {
 						System.out.println("You tied!");
 					}
 					else if(winner == '1'){
-						System.out.println("1 Won!");
+						System.out.println("Player 1 Won!");
 					}
 					else if(winner == '2'){
-						System.out.println("2 Won!");
+						System.out.println("Player 2 Won!");
 					}
 					return;
 				}
